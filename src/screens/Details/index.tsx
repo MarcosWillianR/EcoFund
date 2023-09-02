@@ -197,7 +197,7 @@ export function Details() {
           <View>
             <View style={{ flexDirection: 'row', gap: 10 }}>
               <Button mode="outlined" style={{ flex: 1, borderRadius: 4 }}>Sell</Button>
-              <Button mode="contained" buttonColor={getColor} style={{ flex: 1, borderRadius: 4 }}>Retire credits</Button>
+              <Button mode="contained" buttonColor="#0FDF8F" style={{ flex: 1, borderRadius: 4 }}>Retire credits</Button>
             </View>
 
             <Text style={{ color: '#A0A0A0', marginTop: 16 }}>You've previously retired 28 credits of this asset</Text>
