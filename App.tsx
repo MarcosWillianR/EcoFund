@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { PaperProvider, MD3LightTheme as DefaultTheme, Button } from 'react-native-paper';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-import { SignUp } from '@screens/SignUp'
+import { Routes } from './src/routes';
 
 const theme = {
   ...DefaultTheme,
@@ -18,9 +18,8 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <PaperProvider theme={theme}>
-        <StatusBar style="auto" />
-
-        <SignUp />
+        <StatusBar style="light" backgroundColor="transparent" translucent />
+        <Routes />
       </PaperProvider>
     </GestureHandlerRootView>
   );
