@@ -71,7 +71,7 @@ export function SignUp() {
 
           <Button mode="contained" onPress={handleSubmit}>Create account</Button>
 
-          <Button mode="text" textColor="#A0A0A0">
+          <Button mode="text" textColor="#A0A0A0" onPress={navigation.goBack}>
             Already have an account? 
             <Text style={{ textDecorationStyle: 'solid', textDecorationLine: 'underline' }}>
               {` Log in Here `}
