@@ -14,7 +14,8 @@ module.exports = function(api) {
             '@routes': './src/routes'
           }
         },
-      ]
+      ],
+      'react-native-reanimated/plugin',
     ],
   };
 };
