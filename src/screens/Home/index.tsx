@@ -1,12 +1,11 @@
 import { View, Image } from 'react-native';
-import { Divider, Text, TextInput, IconButton } from 'react-native-paper';
+import { Text } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 
 import homeMainBanner from '@assets/home-main-banner.png';
 
-import { Button } from '@components/Button';
-import { HomeHeader } from '@components/HomeHeader';
+import { HomeHeader } from './components/HomeHeader';
 import { Funds } from './components/Funds';
 
 export function Home() {
@@ -25,10 +24,10 @@ export function Home() {
         </View>
 
         <View style={{ flexDirection: 'row', gap: 16, marginHorizontal: 20, marginVertical: 20 }}>
-          <View style={{ backgroundColor: '#F4F4F4', minHeight: 240, flex: 1 }}>
+          <View style={{ backgroundColor: '#F4F4F4', minHeight: 240, flex: 1, padding: 10, borderRadius: 10 }}>
             <Text>Why should you invest here?</Text>
           </View>
-          <View style={{ backgroundColor: '#F4F4F4', minHeight: 240, flex: 1 }} />
+          <View style={{ backgroundColor: '#F4F4F4', minHeight: 240, flex: 1, padding: 10, borderRadius: 10 }} />
         </View>
       </ScrollView>
     </SafeAreaView> 

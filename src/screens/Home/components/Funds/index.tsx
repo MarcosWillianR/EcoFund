@@ -1,6 +1,10 @@
-import { View, Image } from 'react-native';
+import { useCallback } from 'react';
+import { View, Image, Pressable } from 'react-native';
 import { Text, IconButton } from 'react-native-paper';
 import { FlatList } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
+
+import { AppNavigatorRoutesProps } from '@routes/app.routes';
 
 const mockData = [
   {
@@ -33,6 +37,12 @@ const mockData = [
 ]
 
 export function Funds() {
+  const navigation = useNavigation<AppNavigatorRoutesProps>();
+
+  const handleNavigateToDetails = useCallback((type: string) => {
+    navigation.navigate('details', { type });
+  }, [])
+
   return (
     <FlatList 
       data={mockData}
@@ -42,12 +52,12 @@ export function Funds() {
       showsHorizontalScrollIndicator={false}
       ItemSeparatorComponent={() => <View style={{ width: 15 }} />}
       renderItem={({ item }) => (
-        <View style={{ padding: 12, borderStyle: 'solid', borderColor: '#E6E6E6', borderWidth: 1, borderRadius: 4 }}>
+        <Pressable onPress={() => handleNavigateToDetails(item.type)} style={{ padding: 12, borderStyle: 'solid', borderColor: '#E6E6E6', borderWidth: 1, borderRadius: 4 }}>
           <Image source={item.icon} />
           
           <Text variant="titleMedium" style={{ fontWeight: '600' }}>{item.name}</Text>
           
-          <Image source={item.graph} style={{ marginTop: 14 }} />
+          <Image source={item.graph} style={{ marginTop: 14 }} width={80} height={40} />
           
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <Text variant="titleMedium" style={{ fontWeight: '600', marginTop: 9 }}>{item.value}</Text>
@@ -57,7 +67,7 @@ export function Funds() {
               <Text style={{ color: item.type === 'up' ? '#0FDF8F' : '#EE8688' }}>{item.percent}</Text>
             </View>
           </View>
-        </View>
+        </Pressable>
       )}
     />
   )
