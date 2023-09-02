@@ -1,9 +1,10 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { View, Image, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
 import { LineGraph } from 'react-native-graph';
 import { Text, IconButton, Card } from 'react-native-paper';
+import { useRoute } from '@react-navigation/native';
 
 import { generateRandomGraphData } from '../../data/GraphData';
 
@@ -43,8 +44,24 @@ const STATS_MOCK = [
 ]
 
 export function Details() {
-  const [points, _] = useState(POINTS)
+  const [points, setPoints] = useState(POINTS)
   const [value, setValue] = useState('1h')
+  const [type , setType] = useState('up')
+  const route = useRoute();
+  const params = route.params as { type: string };
+
+  useEffect(() => {
+    setType(params.type)
+    setPoints(generateRandomGraphData(POINT_COUNT))
+  }, [params])
+
+  const getColor = useMemo(() => {
+    return type === 'up' ? '#0FDF8F' : '#EE8688';
+  }, [type])
+
+  const getIcon = useMemo(() => {
+    return type === 'up' ? "call-made" : "arrow-bottom-right"
+  }, [type])
   
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -55,8 +72,8 @@ export function Details() {
           <View>
             <Text variant="titleLarge" style={{ fontWeight: '600' }}>$18.23</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', right: 14, bottom: 10 }}>
-              <IconButton icon="call-made" size={16} iconColor="#0FDF8F" />
-              <Text style={{ color: '#0FDF8F', right: 14 }}>3.51% ($1.21)</Text>
+              <IconButton icon={getIcon} size={16} iconColor={getColor} />
+              <Text style={{ color: getColor, right: 14 }}>3.51% ($1.21)</Text>
             </View>
           </View>
 
@@ -66,7 +83,7 @@ export function Details() {
         <LineGraph
           style={{ width: '100%', aspectRatio: 1.4, marginBottom: 20 }}
           animated
-          color="#0FDF8F"
+          color={getColor}
           points={points}
         />
 
@@ -166,8 +183,8 @@ export function Details() {
             <View>
               <Text variant="headlineSmall" style={{ fontWeight: '800' }}>18 credits</Text>
               <View style={{ flexDirection: 'row', alignItems: 'center', right: 14, bottom: 10 }}>
-                <IconButton icon="call-made" size={16} iconColor="#0FDF8F" />
-                <Text style={{ color: '#0FDF8F', right: 14 }}>8.41%</Text>
+                <IconButton icon={getIcon} size={16} iconColor={getColor} />
+                <Text style={{ color: getColor, right: 14 }}>8.41%</Text>
               </View>
             </View>
             
@@ -180,7 +197,7 @@ export function Details() {
           <View>
             <View style={{ flexDirection: 'row', gap: 10 }}>
               <Button mode="outlined" style={{ flex: 1, borderRadius: 4 }}>Sell</Button>
-              <Button mode="contained" buttonColor="#0FDF8F" style={{ flex: 1, borderRadius: 4 }}>Retire credits</Button>
+              <Button mode="contained" buttonColor={getColor} style={{ flex: 1, borderRadius: 4 }}>Retire credits</Button>
             </View>
 
             <Text style={{ color: '#A0A0A0', marginTop: 16 }}>You've previously retired 28 credits of this asset</Text>
