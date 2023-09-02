@@ -1,9 +1,9 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { PaperProvider, MD3LightTheme as DefaultTheme, Button } from 'react-native-paper';
-import { View } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-import { SignIn } from '@screens/SignIn'
+import { SignUp } from '@screens/SignUp'
 
 const theme = {
   ...DefaultTheme,
@@ -16,10 +16,12 @@ const theme = {
 
 export default function App() {
   return (
-    <PaperProvider theme={theme}>
-      <StatusBar style="auto" />
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <PaperProvider theme={theme}>
+        <StatusBar style="auto" />
 
-      <SignIn />
-    </PaperProvider>
+        <SignUp />
+      </PaperProvider>
+    </GestureHandlerRootView>
   );
 }
