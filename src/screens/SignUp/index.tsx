@@ -1,19 +1,39 @@
+import { useCallback, useState } from 'react';
 import { View } from 'react-native';
-import { Divider, Text, TextInput, Checkbox } from 'react-native-paper';
+import { Divider, Text, TextInput, Checkbox, Snackbar, Portal, Dialog } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+
 
 import { Button } from '@components/Button'
 import { ScrollView } from 'react-native-gesture-handler';
 
 export function SignUp() {
+  const navigation = useNavigation();
+  const [warning, setWarning] = useState(false);
+  const [registerSuccess, setRegisterSuccess] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+
+  const onDismissSnackBar = useCallback(() => {
+    setWarning(false)
+  }, []);
+
+  const handleSubmit = useCallback(() => {
+    if (!acceptedTerms) {
+      setWarning(true);
+    } else {
+      setRegisterSuccess(true);
+    }
+  }, [acceptedTerms]);
+
   return (
-    <SafeAreaView style={{ flex: 1,  }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <Divider style={{ marginTop: 51, marginBottom: 20 }} />
       
-      <ScrollView>
+      <ScrollView contentContainerStyle={{ paddingHorizontal: 20 }}>
         <Text variant="titleLarge" style={{ textAlign: 'center', fontWeight: '600' }}>Create your account</Text>
 
-        <View style={{ marginHorizontal: 20, marginTop: 34 }}>
+        <View style={{ marginTop: 34 }}>
           <TextInput
             label="First Name"
             mode="outlined"
@@ -34,11 +54,13 @@ export function SignUp() {
           <TextInput 
             label="Password"
             mode="outlined"
+            secureTextEntry
+            right={<TextInput.Icon icon="eye" />}
             style={{ marginTop: 20 }}
           />
           
           <View style={{ flexDirection: 'row', marginTop: 20, marginBottom: 32 }}>
-            <Checkbox status="checked" />
+            <Checkbox status={acceptedTerms ? "checked" : "unchecked"} onPress={() => setAcceptedTerms(state => !state)}/>
             <Text style={{ color: "#A0A0A0", maxWidth: '90%' }}>
               I am over 18 years of age and I have read and agree to the
               <Text>{` Terms of Service `}</Text> 
@@ -47,7 +69,7 @@ export function SignUp() {
             </Text>
           </View>
 
-          <Button mode="contained">Create account</Button>
+          <Button mode="contained" onPress={handleSubmit}>Create account</Button>
 
           <Button mode="text" textColor="#A0A0A0">
             Already have an account? 
@@ -57,6 +79,22 @@ export function SignUp() {
           </Button>
         </View>
       </ScrollView>
+
+      <Snackbar visible={warning} onDismiss={onDismissSnackBar}>
+        To register, please accept the Terms of Service and Privacy Policy.
+      </Snackbar>
+
+      <Portal>
+        <Dialog visible={registerSuccess} onDismiss={navigation.goBack}>
+          <Dialog.Title>Success!</Dialog.Title>
+          <Dialog.Content>
+            <Text variant="bodyMedium">The account has created, now you can login.</Text>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button onPress={navigation.goBack}>Done</Button>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
     </SafeAreaView>
   );
 }
