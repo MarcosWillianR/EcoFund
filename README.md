@@ -13,7 +13,10 @@ To get started with this project, follow these steps:
 ## Libraries Used
 
 - [react-native-paper](https://callstack.github.io/react-native-paper/docs/guides/getting-started): Used as the UI library for this project.
-- [redux-toolkit](https://github.com/rahsheen/expo-template-redux-typescript): Used for state management.
+- [redux-toolkit](https://redux-toolkit.js.org/): Used for state management.
+
+## Other things that helped me.
+- [redux-toolkit-helper](https://github.com/rahsheen/expo-template-redux-typescript): Used for knowing more about redux toolkit.
 
 ## Thoughts and Future Improvements
 
