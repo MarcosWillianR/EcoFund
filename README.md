@@ -1,6 +1,6 @@
 # Renewable Energy Fund App - Senior React Native Developer Test
 
-This project was created as part of a test for a Senior React Native Developer role at Crowdform. The "Renewable Energy Fund App" is designed with the purpose of [briefly describe the purpose or functionality of the project].
+This project was created as part of a test for a Senior React Native Developer role at Crowdform.
 
 ## Installation and Usage
 
