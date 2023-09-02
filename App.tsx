@@ -3,6 +3,8 @@ import { StatusBar } from 'expo-status-bar';
 import { PaperProvider, MD3LightTheme as DefaultTheme, Button } from 'react-native-paper';
 import { View } from 'react-native';
 
+import { SignIn } from '@screens/SignIn'
+
 const theme = {
   ...DefaultTheme,
   colors: {
@@ -17,11 +19,7 @@ export default function App() {
     <PaperProvider theme={theme}>
       <StatusBar style="auto" />
 
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Button icon="camera">
-          Press me
-        </Button>
-      </View>
+      <SignIn />
     </PaperProvider>
   );
 }
