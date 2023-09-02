@@ -1,13 +1,22 @@
+import { useCallback } from 'react';
 import { View } from 'react-native';
 import { Divider, Text, IconButton } from 'react-native-paper';
+import { useAppDispatch } from '../../../../store/createStore';
+import { signOut } from '../../../../store/modules/auth/authSlice';
 
 import { Button } from '@components/Button'
 
 export function HomeHeader() {
+  const dispatch = useAppDispatch();
+
+  const handleSignOut = useCallback(() => {
+    dispatch(signOut());
+  }, []);
+
   return (
     <>
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginHorizontal: 20 }}>
-        <IconButton icon="account-outline" mode="contained-tonal" />
+        <IconButton icon="account-outline" mode="contained-tonal" onPress={handleSignOut} />
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Text variant="bodyLarge" style={{ fontWeight: '600', left: 14 }}>Account: $1,457.23</Text>
           <IconButton icon="chevron-down" />
